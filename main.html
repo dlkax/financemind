@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Finance Mind — Consultoria Financeira Inteligente</title>
+  <meta name="description" content="Finance Mind — consultoria financeira moderna. Diagnóstico, redução de despesas e plano de investimentos sob medida." />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --surface: #f7f9fb;
+      --accent: #1E2A78; /* azul escuro */
+      --accent-2: #2ECC71; /* verde */
+      --muted: #6b7280;
+      --card: #ffffff;
+      --radius: 14px;
+      --max-width: 1100px;
+    }
+
+    /* Reset simples */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--surface);
+      color:#0f1724;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      -webkit-text-size-adjust:100%;
+    }
+
+    a{color:var(--accent); text-decoration:none}
+    img{max-width:100%; height:auto; display:block}
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:24px;
+    }
+
+    /* Header */
+    header{
+      background:transparent;
+      padding:18px 0;
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter:saturate(120%) blur(6px);
+    }
+    .nav{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:52px;
+      height:52px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),#17306a);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      box-shadow:0 6px 18px rgba(14,30,90,0.08);
+    }
+    .brand h1{font-size:16px;margin:0;color:var(--accent);letter-spacing:0.2px}
+    .nav-links{display:none}
+    .cta{
+      background:var(--accent-2);
+      color:white;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(46,204,113,0.12);
+    }
+
+    /* Hero */
+    .hero{
+      background:linear-gradient(180deg,rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%);
+      padding:36px 0 24px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:22px;
+      align-items:center;
+    }
+    .hero-left h2{
+      font-size:28px;
+      margin:0 0 14px 0;
+      color:var(--accent);
+      line-height:1.05;
+    }
+    .hero-left p{margin:0 0 16px;color:var(--muted)}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-primary{
+      background:var(--accent-2);
+      color:#fff;
+      padding:12px 18px;
+      border-radius:12px;
+      font-weight:600;
+      border:0;
+      cursor:pointer;
+    }
+    .btn-outline{
+      background:transparent;
+      color:var(--accent);
+      padding:12px 18px;
+      border-radius:12px;
+      border:1px solid rgba(30,42,120,0.08);
+      font-weight:600;
+      cursor:pointer;
+    }
+        .hero-illustration {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
+    }
+
+
+    /* Sections */
+    section{padding:28px 0}
+    .grid-3{display:grid;grid-template-columns:1fr;gap:18px}
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 6px 18px rgba(12,30,80,0.04);
+    }
+    .card h3{margin:0 0 8px 0;color:var(--accent)}
+    .muted{color:var(--muted);font-size:15px}
+
+    /* Services */
+    .services-grid{display:grid;grid-template-columns:1fr;gap:16px}
+    .service{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      border-radius:12px;
+      background:linear-gradient(180deg, #fff, #fcfdff);
+      border:1px solid rgba(10,20,40,0.03);
+    }
+    .ico{
+      min-width:56px;
+      min-height:56px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(30,42,120,0.06), rgba(44,60,140,0.02));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:var(--accent);
+      font-size:20px;
+    }
+    .service h4{margin:0 0 6px 0}
+    .service p{margin:0;color:var(--muted)}
+
+    /* Testimonials */
+    .testimonials{display:flex;flex-direction:column;gap:12px}
+    .testimonial{background:linear-gradient(180deg,#fff,#fbfdff);padding:16px;border-radius:10px;border:1px solid rgba(15,23,36,0.03)}
+    .testimonial p{margin:0;color:var(--muted)}
+
+    /* Footer / Contact */
+    footer{padding:24px 0 48px}
+    .footer-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Responsive layout */
+    @media(min-width:720px){
+      .nav-links{display:flex;gap:18px;align-items:center}
+      .hero-grid{grid-template-columns:1fr 420px;gap:32px}
+      .grid-3{grid-template-columns:repeat(3,1fr);gap:18px}
+      .services-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+      .testimonials{flex-direction:row}
+      .footer-grid{grid-template-columns:1fr 300px}
+    }
+
+    @media(min-width:1024px){
+      body{font-size:16px}
+      .hero-left h2{font-size:40px}
+    }
+
+    /* simple form styles */
+    .form-row{display:flex;flex-direction:column;gap:8px}
+    input,textarea,select{
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(12,18,40,0.06);
+      font-size:15px;
+      outline:none;
+    }
+    .form-row label{font-weight:600;color:var(--muted);font-size:13px}
+    .small-note{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <!-- Replace logo content with your SVG/PNG -->
+        <div class="logo" aria-hidden="true">FM</div>
+        <div>
+          <h1>Finance Mind</h1>
+          <div class="small muted">Consultoria financeira inteligente</div>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato" class="cta">Agendar</a>
+      </nav>
+
+      <!-- Mobile CTA -->
+      <div class="nav-actions">
+        <a href="#contato" class="cta" style="display:inline-block">Agendar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h2>Transforme sua vida financeira com decisões inteligentes.</h2>
+          <p class="muted">Consultoria financeira moderna para quem quer economizar, investir e prosperar — sem complicação.</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#contato">Quero meu diagnóstico gratuito</a>
+            <a class="btn-outline" href="#servicos">Ver serviços</a>
+          </div>
+
+          <!-- Quick features -->
+          <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+            <div class="card" style="display:inline-flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px">
+              <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-2)"></div>
+              <div style="font-weight:600">Entrega em 48h</div>
+            </div>
+            <div class="card" style="display:inline-flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px">
+              <div style="width:10px;height:10px;border-radius:50%;background:#ffb703"></div>
+              <div style="font-weight:600">Plano prático e direto</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-illustration" aria-hidden="true">
+          <!-- Replace with real illustration / image -->
+          <img src="img/site-financeiro.png" alt="pessoa olhando gráfico" style="border-radius:10px;max-width:280px">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="sobre">
+      <div class="container">
+        <div style="display:flex;align-items:flex-start;gap:20px;flex-direction:column">
+          <div style="max-width:720px">
+            <h3 style="margin:0 0 10px 0;color:var(--accent)">Sobre a Finance Mind</h3>
+            <p class="muted">A Finance Mind nasceu para simplificar o mundo financeiro. Nosso objetivo é ajudar pessoas comuns a tomarem decisões inteligentes sobre o dinheiro — com planejamento prático, automação e acompanhamento humano. Unimos conhecimento certificado e tecnologia para entregar resultado.</p>
+          </div>
+
+          <div class="grid-3" style="margin-top:18px">
+            <div class="card">
+              <h3>Parte Financeira</h3>
+              <p class="muted">Especialistas certificados (CPA-20) orientam na redução de despesas e definição de estratégias. Você recebe recomendações com base no seu perfil.</p>
+            </div>
+
+            <div class="card">
+              <h3>Parte Digital</h3>
+              <p class="muted">Automação, relatórios rápidos por IA e acompanhamento eficiente: menos tempo esperando, mais resultado prático.</p>
+            </div>
+
+            <div class="card">
+              <h3>Resultados</h3>
+              <p class="muted">Planos simples e aplicáveis — objetivo: cortes de gasto mensais reais e alocação inicial de investimento segura.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="servicos">
+      <div class="container">
+        <h3 style="color:var(--accent);margin-bottom:12px">Serviços</h3>
+        <div class="services-grid">
+          <div class="service">
+            <div class="ico">01</div>
+            <div>
+              <h4>Diagnóstico Financeiro Pessoal</h4>
+              <p class="muted">Análise completa de renda, gastos e dívidas. Relatório com ações rápidas para economizar.</p>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="ico">02</div>
+            <div>
+              <h4>Plano de Ação Personalizado</h4>
+              <p class="muted">Passos claros para reduzir despesas e começar a investir de forma segura.</p>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="ico">03</div>
+            <div>
+              <h4>Acompanhamento Automatizado</h4>
+              <p class="muted">Relatórios mensais e notificações com sugestões práticas (opção de assinatura).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="depoimentos">
+      <div class="container">
+        <h3 style="color:var(--accent);margin-bottom:12px">Depoimentos</h3>
+        <div class="testimonials">
+          <div class="testimonial">
+            <strong>Mariana, 29</strong>
+            <p class="muted">“Reduzi R$ 800/mês com dicas práticas — em 2 meses já estava investindo!”</p>
+          </div>
+          <div class="testimonial">
+            <strong>Carlos, 34</strong>
+            <p class="muted">“O diagnóstico foi direto ao ponto. Recomendo para quem precisa organizar a vida financeira.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contato">
+      <div class="container">
+        <div style="display:flex;flex-direction:column;gap:18px;align-items:stretch">
+          <div style="display:flex;gap:18px;flex-direction:column">
+            <h3 style="color:var(--accent);margin:0">Quero meu diagnóstico</h3>
+            <p class="muted">Preencha os campos abaixo e receba um relatório personalizado em até 48 horas.</p>
+          </div>
+
+          <!-- Simple form (no backend) -->
+          <form class="card" onsubmit="enviarFormulario(event)">
+  <div style="display:grid;gap:12px">
+    <div class="form-row">
+      <label for="nome">Nome completo</label>
+      <input id="nome" placeholder="Seu nome" required />
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="form-row">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" placeholder="seu@email.com" required />
+      </div>
+      <div class="form-row">
+        <label for="telefone">Telefone/WhatsApp</label>
+        <input id="telefone" placeholder="(99) 99999-9999" required />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label for="renda">Renda líquida mensal (R$)</label>
+      <input id="renda" type="number" placeholder="Ex: 2500" required />
+    </div>
+
+    <div class="form-row">
+      <label for="gastos">Gastos fixos mensais aproximados (R$)</label>
+      <input id="gastos" type="number" placeholder="Ex: 1800" required />
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <button class="btn-primary" type="submit">Receber diagnóstico (GRATUITO)</button>
+    </div>
+
+    <div class="small-note">Ao enviar, você concorda com nosso <a href="#">termos</a> e política de privacidade.</div>
+  </div>
+</form>
+
+<script>
+  async function enviarFormulario(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const telefone = document.getElementById('telefone').value;
+    const renda = document.getElementById('renda').value;
+    const gastos = document.getElementById('gastos').value;
+
+    const dados = { nome, email, telefone, renda, gastos };
+
+    try {
+      // Envia os dados pro backend Flask
+      await fetch("http://localhost:5000/salvar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+      });
+
+      // Depois redireciona pro WhatsApp
+      const mensagem = `Olá! Me chamo ${nome}
+Gostaria de receber meu diagnóstico financeiro gratuito.
+
+📧 E-mail: ${email}
+📱 Telefone: ${telefone}
+💰 Renda mensal: R$${renda}
+💸 Gastos mensais: R$${gastos}
+
+Aguardo seu retorno!`;
+
+      const numeroWhatsApp = "5511948378344"; // seu número
+      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+      window.location.href = url;
+
+    } catch (error) {
+      alert("Erro ao enviar. Tente novamente.");
+      console.error(error);
+    }
+  }
+</script>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="logo" style="width:44px;height:44px">FM</div>
+          <div>
+            <strong>Finance Mind</strong>
+            <div class="small muted">Consultoria financeira inteligente</div>
+          </div>
+        </div>
+
+        <p class="small" style="margin-top:12px"> • contato@financemind.com • <a href="https://www.instagram.com/financemindofc/">Instagram</a></p>
+      </div>
+
+      <div>
+        <h4 style="margin:0 0 8px 0;color:var(--accent)">Fale conosco</h4>
+        <p class="small muted">WhatsApp: <a href="#">(11) 94873-8344</a></p>
+        <p class="small muted">Horário: Seg–Sex 09:00–19:00</p>
+      </div>
+
+    </div>
+  </footer>
+
+  
+</body>
+</html>
