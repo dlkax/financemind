@@ -358,11 +358,11 @@
           </div>
 
           <!-- Simple form (no backend) -->
-          <form class="card" onsubmit="enviarFormulario(event)">
+          <form id="form" class="card">
   <div style="display:grid;gap:12px">
     <div class="form-row">
-      <label for="nome">Nome completo</label>
-      <input id="nome" placeholder="Seu nome" required />
+      <label for="name">Nome completo</label>
+      <input id="name" placeholder="Seu nome" required />
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -371,19 +371,9 @@
         <input id="email" type="email" placeholder="seu@email.com" required />
       </div>
       <div class="form-row">
-        <label for="telefone">Telefone/WhatsApp</label>
-        <input id="telefone" placeholder="(99) 99999-9999" required />
+        <label for="phone">Telefone/WhatsApp</label>
+        <input id="phone" placeholder="(99) 99999-9999" required />
       </div>
-    </div>
-
-    <div class="form-row">
-      <label for="renda">Renda líquida mensal (R$)</label>
-      <input id="renda" type="number" placeholder="Ex: 2500" required />
-    </div>
-
-    <div class="form-row">
-      <label for="gastos">Gastos fixos mensais aproximados (R$)</label>
-      <input id="gastos" type="number" placeholder="Ex: 1800" required />
     </div>
 
     <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
@@ -393,6 +383,7 @@
     <div class="small-note">Ao enviar, você concorda com nosso <a href="#">termos</a> e política de privacidade.</div>
   </div>
 </form>
+
         </div>
       </div>
     </section>
@@ -420,6 +411,7 @@
 
     </div>
   </footer>
+<script src="/static/js/form.js"></script>
 
   
 </body>
