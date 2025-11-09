@@ -395,45 +395,32 @@
 </form>
 
 <script>
-  async function enviarFormulario(event) {
-    event.preventDefault();
+  document.querySelector("#form").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const telefone = document.getElementById('telefone').value;
-    const renda = document.getElementById('renda').value;
-    const gastos = document.getElementById('gastos').value;
+  const data = {
+    name: document.querySelector("#name").value,
+    email: document.querySelector("#email").value,
+    phone: document.querySelector("#phone").value,
+  };
 
-    const dados = { nome, email, telefone, renda, gastos };
+  try {
+    const res = await fetch("/salvar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-    try {
-      // Envia os dados pro backend Flask
-      await fetch("https://financemind-5qxs.vercel.app/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dados)
-      });
-
-      // Depois redireciona pro WhatsApp
-      const mensagem = `Olá! Me chamo ${nome}
-Gostaria de receber meu diagnóstico financeiro gratuito.
-
-📧 E-mail: ${email}
-📱 Telefone: ${telefone}
-💰 Renda mensal: R$${renda}
-💸 Gastos mensais: R$${gastos}
-
-Aguardo seu retorno!`;
-
-      const numeroWhatsApp = "5511948378344"; // seu número
-      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-      window.location.href = url;
-
-    } catch (error) {
-      alert("Erro ao enviar. Tente novamente.");
-      console.error(error);
-    }
+    const result = await res.json();
+    alert(result.message || result.error);
+  } catch (err) {
+    alert("Erro ao enviar formulário!");
+    console.error(err);
   }
+});
+
 </script>
 
         </div>
