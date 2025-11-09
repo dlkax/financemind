@@ -264,7 +264,7 @@
 
         <div class="hero-illustration" aria-hidden="true">
           <!-- Replace with real illustration / image -->
-          <img src="img/site-financeiro.png" alt="pessoa olhando gráfico" style="border-radius:10px;max-width:280px">
+          <img src="{{ url_for('static', filename='img/site-financeiro.png') }}" alt="site financeiro" style="border-radius:10px;max-width:280px;">
         </div>
       </div>
     </section>
@@ -379,8 +379,6 @@
     <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
       <button class="btn-primary" type="submit">Receber diagnóstico (GRATUITO)</button>
     </div>
-
-    <div class="small-note">Ao enviar, você concorda com nosso <a href="#">termos</a> e política de privacidade.</div>
   </div>
 </form>
 
@@ -389,7 +387,7 @@
     </section>
   </main>
 
-  <footer>
+    <footer>
     <div class="container footer-grid">
       <div>
         <div style="display:flex;gap:12px;align-items:center">
@@ -411,8 +409,10 @@
 
     </div>
   </footer>
-<script src="/static/js/form.js"></script>
 
-  
+  <!-- ✅ Script JS no final -->
+  <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+
 </body>
 </html>
+

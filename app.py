@@ -1,45 +1,31 @@
 from flask import Flask, render_template, request, jsonify
-from save_lead import save_lead
-import logging
-
-# Configuração de logs (para depurar no Vercel)
-logging.basicConfig(level=logging.DEBUG)
+import csv, os
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html')  # Renderiza o site principal
+    return render_template('index.html')
 
-@app.route('/api')
-def api_status():
-    return jsonify({"message": "API funcionando corretamente!"})
+@app.route('/enviar', methods=['POST'])
+def enviar():
+    data = request.get_json()
 
-@app.route('/salvar', methods=['POST'])
-def salvar():
-    try:
-        data = request.get_json()
-        app.logger.debug(f"Dados recebidos: {data}")
+    nome = data.get('nome')
+    email = data.get('email')
+    telefone = data.get('telefone')
 
-        # Extrair dados do formulário
-        name = data.get("name")
-        email = data.get("email")
-        phone = data.get("phone")
+    if not all([nome, email, telefone]):
+        return jsonify({'message': 'Preencha todos os campos!'}), 400
 
-        # Verificar campos obrigatórios
-        if not name or not email or not phone:
-            return jsonify({"success": False, "message": "Campos incompletos."}), 400
+    file_exists = os.path.isfile('leads.csv')
+    with open('leads.csv', 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        if not file_exists:
+            writer.writerow(['Nome', 'Email', 'Telefone'])
+        writer.writerow([nome, email, telefone])
 
-        # Salvar lead na planilha
-        result = save_lead(name, email, phone)
+    return jsonify({'message': 'Lead cadastrado com sucesso!'})
 
-        # Retornar resposta
-        return jsonify(result)
-
-    except Exception as e:
-        app.logger.error(f"Erro ao salvar lead: {str(e)}", exc_info=True)
-        return jsonify({"success": False, "message": f"Erro no servidor: {str(e)}"}), 500
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)

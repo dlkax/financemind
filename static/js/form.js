@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#form");
-  if (!form) {
-    console.error("Formulário não encontrado!");
-    return;
-  }
+  if (!form) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -27,12 +24,15 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const result = await res.json();
-      alert(result.message || result.error);
-
-      if (result.success) form.reset();
+      if (res.ok) {
+        alert(result.message || "Lead salvo com sucesso!");
+        form.reset();
+      } else {
+        alert("Erro no servidor: " + (result.message || "tente novamente."));
+      }
     } catch (err) {
-      console.error("Erro ao enviar formulário:", err);
-      alert("Erro ao enviar formulário. Tente novamente.");
+      console.error("Erro ao enviar:", err);
+      alert("Erro ao enviar o formulário. Tente novamente.");
     }
   });
 });
