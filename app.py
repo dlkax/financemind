@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, jsonify
-from save_lead import salvar_lead
+from save_lead import save_lead
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 
 app = Flask(__name__)
 
@@ -17,5 +20,6 @@ def salvar():
     salvar_lead(data)
     return jsonify({"message": "Lead salvo com sucesso!"})
 
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    app.run(debug=True)
+
