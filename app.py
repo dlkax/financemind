@@ -17,7 +17,7 @@ def api_status():
 @app.route('/salvar', methods=['POST'])
 def salvar():
     data = request.get_json()
-    salvar_lead(data)
+    save_lead(data)
     return jsonify({"message": "Lead salvo com sucesso!"})
 
 if __name__ == "__main__":
