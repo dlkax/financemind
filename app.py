@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from save_lead import save_lead
 
 app = Flask(__name__)
-CORS(app)  # Permitir requisições do frontend
+CORS(app)
 
 @app.route('/')
 def home():
@@ -12,6 +11,9 @@ def home():
 @app.route('/api/lead', methods=['POST'])
 def create_lead():
     try:
+        # Importar aqui para evitar problemas
+        from save_lead import save_lead
+        
         data = request.get_json()
         name = data.get('name')
         email = data.get('email')
@@ -20,8 +22,6 @@ def create_lead():
         result = save_lead(name, email, phone)
         return jsonify(result)
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({"success": False, "message": str(e)}), 500
-
-# Para Vercel
-if __name__ == '__main__':
-    app.run()
