@@ -1,21 +1,27 @@
-from flask import Flask, request
-from save_lead import salvar_lead
+from flask import Flask, request, jsonify
 from flask_cors import CORS
+from save_lead import save_lead
 
 app = Flask(__name__)
-CORS(app)  # permite acesso do site local
+CORS(app)  # Permitir requisições do frontend
 
-@app.route("/salvar", methods=["POST"])
-def salvar():
-    data = request.get_json()
-    salvar_lead(
-        data.get("nome"),
-        data.get("email"),
-        data.get("telefone"),
-        data.get("renda"),
-        data.get("gastos")
-    )
-    return "ok"
+@app.route('/')
+def home():
+    return jsonify({"message": "API funcionando!"})
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/api/lead', methods=['POST'])
+def create_lead():
+    try:
+        data = request.get_json()
+        name = data.get('name')
+        email = data.get('email')
+        phone = data.get('phone')
+        
+        result = save_lead(name, email, phone)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+# Para Vercel
+if __name__ == '__main__':
+    app.run()
