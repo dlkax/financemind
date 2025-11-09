@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("#form");
-  if (!form) return;
+  const form = document.getElementById("form");
+
+  if (!form) {
+    console.error("❌ Formulário não encontrado no DOM.");
+    return;
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -12,27 +16,30 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (!data.name || !data.email || !data.phone) {
-      alert("Por favor, preencha todos os campos!");
+      alert("Por favor, preencha todos os campos.");
       return;
     }
 
     try {
-      const res = await fetch(window.location.origin + "/salvar", {
+      const res = await fetch("/salvar", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
 
-      const result = await res.json();
-      if (res.ok) {
-        alert(result.message || "Lead salvo com sucesso!");
-        form.reset();
-      } else {
-        alert("Erro no servidor: " + (result.message || "tente novamente."));
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text);
       }
+
+      const result = await res.json();
+      alert(result.message || "Lead enviado com sucesso!");
+      form.reset();
     } catch (err) {
       console.error("Erro ao enviar:", err);
-      alert("Erro ao enviar o formulário. Tente novamente.");
+      alert("Erro ao enviar formulário.");
     }
   });
 });

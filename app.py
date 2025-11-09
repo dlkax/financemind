@@ -1,31 +1,40 @@
 from flask import Flask, render_template, request, jsonify
-import csv, os
+from save_lead import save_lead
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
-@app.route('/enviar', methods=['POST'])
-def enviar():
-    data = request.get_json()
+@app.route('/api')
+def api_status():
+    return jsonify({"message": "API funcionando!"})
 
-    nome = data.get('nome')
-    email = data.get('email')
-    telefone = data.get('telefone')
+@app.route('/salvar', methods=['POST'])
+def salvar():
+    try:
+        data = request.get_json()
+        name = data.get("name")
+        email = data.get("email")
+        phone = data.get("phone")
 
-    if not all([nome, email, telefone]):
-        return jsonify({'message': 'Preencha todos os campos!'}), 400
+        if not all([name, email, phone]):
+            return jsonify({"error": "Campos incompletos."}), 400
 
-    file_exists = os.path.isfile('leads.csv')
-    with open('leads.csv', 'a', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        if not file_exists:
-            writer.writerow(['Nome', 'Email', 'Telefone'])
-        writer.writerow([nome, email, telefone])
+        result = save_lead(name, email, phone)
 
-    return jsonify({'message': 'Lead cadastrado com sucesso!'})
+        if result.get("success"):
+            return jsonify({"message": "Lead salvo com sucesso!"}), 200
+        else:
+            return jsonify({"error": result.get("message", "Erro ao salvar lead.")}), 500
 
-if __name__ == '__main__':
+    except Exception as e:
+        logging.exception("Erro ao salvar lead:")
+        return jsonify({"error": str(e)}), 500
+
+
+if __name__ == "__main__":
     app.run(debug=True)
