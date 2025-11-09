@@ -408,7 +408,7 @@
 
     try {
       // Envia os dados pro backend Flask
-      await fetch("http://localhost:5000/salvar", {
+      await fetch("https://financemind-5qxs.vercel.app/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
