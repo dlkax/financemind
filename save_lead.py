@@ -24,7 +24,7 @@ def save_lead(name, email, phone):
         sheet = client.open("leadsfinancemind").sheet1
         sheet.append_row([name, email, phone])
 
-        return {"success": True, "message": "Lead salvo com sucesso!"}
+        return {"success": True, "message": "Formulario Enviado!\n Em breve um assistente entrará em contato. "}
 
     except Exception as e:
         import traceback
