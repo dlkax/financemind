@@ -27,7 +27,7 @@ def salvar():
         result = save_lead(name, email, phone)
 
         if result.get("success"):
-            return jsonify({"message": "Lead salvo com sucesso!"}), 200
+            return jsonify({"message": "Formulario Enviado!\n Em breve um assistente entrará em contato."}), 200
         else:
             return jsonify({"error": result.get("message", "Erro ao salvar lead.")}), 500
 
