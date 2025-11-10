@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const result = await res.json();
-      alert(result.message || "Lead enviado com sucesso!");
+      alert(result.message || "Formulario Enviado!\n Em breve um assistente entrará em contato. ");
       form.reset();
     } catch (err) {
       console.error("Erro ao enviar:", err);
