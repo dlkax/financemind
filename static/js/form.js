@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const res = await fetch("https://financemind-dbgb.vercel.app/salvar", {
+      const res = await fetch("/salvar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
