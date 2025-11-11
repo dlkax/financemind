@@ -3,14 +3,13 @@ from save_lead import save_lead
 import logging
 from flask_cors import CORS
 
+# Inicializa app e ativa CORS corretamente
 app = Flask(__name__)
 CORS(app, resources={
     r"/*": {"origins": ["https://financemind.net", "https://www.financemind.net"]}
 })
 
-
 logging.basicConfig(level=logging.DEBUG)
-app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -34,9 +33,13 @@ def salvar():
         result = save_lead(name, email, phone)
 
         if result.get("success"):
-            return jsonify({"message": "Formulario Enviado!\nEm breve um assistente entrará em contato."}), 200
+            return jsonify({
+                "message": "Formulario Enviado!\nEm breve um assistente entrará em contato."
+            }), 200
         else:
-            return jsonify({"error": result.get("message", "Erro ao salvar lead.")}), 500
+            return jsonify({
+                "error": result.get("message", "Erro ao salvar lead.")
+            }), 500
 
     except Exception as e:
         logging.exception("Erro ao salvar lead:")
