@@ -4,7 +4,7 @@ import logging
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
